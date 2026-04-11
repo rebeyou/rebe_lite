@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "page-styles": {
+      "type": "html-v3",
+      "settings": {
+        "enablesection": true,
+        "code": "<style>.main-content{padding-bottom:0;}</style>",
+        "animation": "",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "setwidth": "container"
+      }
+    },
+    "grid-banner": {
+      "type": "grid-banner",
+      "settings": {}
+    },
+    "advanced-content-breast": {
+      "type": "advanced-content-breast",
+      "settings": {}
+    }
+  },
+  "order": ["page-styles", "grid-banner", "advanced-content-breast"]
+}

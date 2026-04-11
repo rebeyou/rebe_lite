@@ -1,0 +1,210 @@
+<!doctype html>
+<html class="no-js " lang="{{ shop.locale }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_header_bg }}"> 
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+    <title>
+      {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+    <link rel="preload" href="{{ 'icomoon.woff' | asset_url }}" as="font" type="font/woff" crossorigin>
+    {% if request.page_type == 'page' and page.handle == 'veins' %}
+      <link rel="preload" as="image"
+        href="{{ 'ultraSoundExam.webp' | file_url }}"
+        imagesrcset="
+          //www.rebeyou.com/cdn/shop/files/ultraSoundExam.webp?width=300 300w,
+          //www.rebeyou.com/cdn/shop/files/ultraSoundExam.webp?width=600 600w,
+          //www.rebeyou.com/cdn/shop/files/ultraSoundExam.webp?width=1000 1000w"
+        imagesizes="(max-width: 768px) 100vw, 33vw"
+        fetchpriority="high">
+    {% endif %}
+    {%- if template.name == 'page' and page.handle == 'breast' -%}
+      <link 
+        rel="preload" 
+        as="image" 
+        href="{{ 'woman-measuring-bust_1920x.webp' | file_img_url: '800x' }}"
+        fetchpriority="high"
+      >
+    {%- endif -%}
+    {% if template == 'index' %}
+      {%- assign _lcp_section = sections['slideshow-1'] -%}
+      {%- assign _lcp_block = _lcp_section.blocks | first -%}
+      {%- if _lcp_block.settings.image != blank -%}
+        <link rel="preload" as="image"
+          href="{{ _lcp_block.settings.image | image_url: width: 1500 }}"
+          imagesrcset="{{ _lcp_block.settings.image | image_url: width: 750 }} 750w, {{ _lcp_block.settings.image | image_url: width: 1200 }} 1200w, {{ _lcp_block.settings.image | image_url: width: 1500 }} 1500w, {{ _lcp_block.settings.image | image_url: width: 2000 }} 2000w"
+          imagesizes="100vw"
+          fetchpriority="high"
+          type="image/webp">
+      {%- else -%}
+        <link rel="preload" as="image"
+          href="//www.rebeyou.com/cdn/shop/files/slideShow1.webp?v=1772287263&width=1200"
+          imagesrcset="//www.rebeyou.com/cdn/shop/files/slideShow1.webp?v=1772287263&width=750 750w,
+                      //www.rebeyou.com/cdn/shop/files/slideShow1.webp?v=1772287263&width=1200 1200w,
+                      //www.rebeyou.com/cdn/shop/files/slideShow1.webp?v=1772287263&width=1500 1500w,
+                      //www.rebeyou.com/cdn/shop/files/slideShow1.webp?v=1772287263&width=2000 2000w"
+          imagesizes="100vw"
+          fetchpriority="high"
+          type="image/webp">
+      {%- endif -%}
+    {% endif %}
+    {%- include 'social-meta-tags' -%}      
+    {%- include 'header-css' -%}
+    {{ content_for_header }}
+    <script>
+      var dearDocLoaded = false;
+      function loadDearDoc() {
+        if (dearDocLoaded) return;
+        dearDocLoaded = true;
+        var s = document.createElement('script');
+        s.src = "https://firebasestorage.googleapis.com/v0/b/deardoc-embed-codes.appspot.com/o/Rebe%20Skin%20and%20Vein%20Clinic%2FRebe%20Skin%20and%20Vein%20Clinic%20-%20Ronald%20Kolegraff%2Fcode.js?alt=media&token=d123fb9c-0e45-400f-b017-6803b0452cd0";
+        document.head.appendChild(s);
+      }
+      // Load on interaction OR after 3 seconds, whichever comes first
+      ['mousedown','touchstart','scroll','keydown'].forEach(function(e) {
+        window.addEventListener(e, loadDearDoc, {once: true, passive: true});
+      });
+      setTimeout(loadDearDoc, 3000);
+    </script>
+    <style>   
+      @media (max-width: 749px) {
+        .header__logo-image,
+        .header__heading-logo img,
+        .site-header__logo img,
+        .site-header .logo img {
+          max-width: 100px !important;
+        }
+      }
+
+      .breadcrumb {
+        position: relative;
+        overflow: hidden;
+      }
+      .breadcrumb-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+      .breadcrumb .layer,
+      .breadcrumb .container,
+      .breadcrumb .container-fluid {
+        position: relative;
+        z-index: 1;
+      }
+      .g-breadcrumb.breadcrumbs-style_2 {
+        padding: 80px 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        border-radius: 0;
+      }
+      @media (max-width:576px) {
+        .g-breadcrumb.breadcrumbs-style_2 {
+          padding: 50px 0;
+        }
+        .g-breadcrumb.breadcrumbs-style_2 h3 {
+          font-size: 26px;
+        }
+      }
+      /* Accessibility: fix contrast on btn-underline-white buttons */
+      .banner-theme figcaption .btn.btn-underline-white,
+      .banner-theme figcaption .btn.btn-underline.btn-underline-white.gradient-theme,
+      .banner-theme figcaption button.btn.btn-underline-white {
+        color: #1a1a1a !important;
+        text-shadow: none !important;
+      }
+      .banner-theme figcaption .btn.btn-underline-white:hover,
+      .banner-theme figcaption .btn.btn-underline.btn-underline-white.gradient-theme:hover,
+      .banner-theme figcaption button.btn.btn-underline.btn-underline-white.gradient-theme:hover {
+        color: #1a1a1a !important;
+        background-color: #a07830 !important;
+        border-color: #a07830 !important;
+        text-shadow: none !important;
+      } 
+      /* LCP fix: prevent Slick fade from hiding first slide before JS init */
+      .slideshow .slick-slide:first-child,
+      .slideshow .slideshow__slide:first-child {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+      .slideshow .slick-slide:first-child .slideshow__image,
+      .slideshow .slideshow__slide:first-child .slideshow__image img {
+        opacity: 1 !important;
+        visibility: visible !important;
+      } 
+      /* Reserve announcement bar height to prevent layout shift */
+      #announcement-bar,
+      .announcement-bar {
+        min-height: 40px; /* match your actual bar height */
+        contain: layout;
+      }
+
+      /* Reserve slideshow height before Slick init */
+      .slideshow-wrap,
+      .slideshow {
+        min-height: 500px; /* match your hero height */
+      }
+      @media (max-width: 749px) {
+        .slideshow-wrap,
+        .slideshow {
+          min-height: 300px;
+        }
+      }    
+    </style> 
+    {% comment %} Async load for accelerated-checkout CSS {% endcomment %}
+    <script>
+      (function() {
+        var checkoutCSS = document.querySelector('link[href*="accelerated-checkout"]');
+        if (checkoutCSS) {
+          checkoutCSS.media = 'print';
+          checkoutCSS.onload = function() { this.media = 'all'; };
+        }
+      })();
+    </script>
+  </head>
+
+  <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} body-theme {% if settings.productpage == 'product-2' or settings.productpage == 'product-6' or settings.productpage == 'product-7' %} product-hide-breadcrumb {% endif %}" >   
+    
+    {%- section 'announcement-bar' -%}
+    {%- include 'loading' -%}
+    {%- include 'header' -%}
+    <div class="page-container page-element is-moved-by-drawer">
+      {%- include 'breadcrumb' -%}
+      <main class="main-content" id="MainContent" role="main">
+        {%- if settings.enable_animationscroll -%}<div id ="js-scroll">{% endif%}
+        {%- if settings.enable_animationscroll -%}<div data-scroll-section>{% endif%}
+        {%- include 'slideshow' -%}
+        {%- if settings.enable_animationscroll -%}</div>{% endif%}       
+        {{ content_for_layout }}    
+        {%- if settings.enable_animationscroll -%}</div>{% endif%}
+      </main>
+        {%- include 'footer' -%}
+        {%- include 'popup-newsletter' -%}
+        {%- section 'product-suggest' -%}
+        {%- section 'recently-viewed' -%}
+    </div>    
+    {%- include 'cookie-policy' -%}
+    {%- include 'back-to-top' -%}
+    {%- include 'menu-mobile' -%}
+    {%- include 'notify-popup' -%}
+    {%- include 'bottom-contents' -%}
+    {%- include 'quickview' -%}
+    {%- include 'popup-compare' -%}
+    {%- include 'header-js' -%}
+    {%- if settings.show_multiple_currencies -%}
+      {{ "/services/javascripts/currencies.js" | script_tag }}
+    {%- endif -%}
+    
+    <script src="{{ 'slick-aria-patch.js' | asset_url }}" defer></script>
+    <script src="{{ 'custom-script.js' | asset_url }}" defer></script>         
+  </body>
+</html>

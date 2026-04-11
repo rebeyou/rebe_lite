@@ -1,0 +1,11 @@
+{%- if itemName == 'Biote Hormone Therapy' -%}
+  <img src="https://cdn.shopify.com/s/files/1/0522/8678/3654/files/biote.png?v=1771025489" alt="Biote logo image" class="biote-menu-logo" style="height: 24px !important; width: auto !important; max-height: 24px !important; vertical-align: middle; margin-right: 0px;"> Hormone Therapy
+{%- elsif itemName == 'About Biote' -%}
+  About <img src="https://cdn.shopify.com/s/files/1/0522/8678/3654/files/biote.png?v=1771025489" alt="Biote logo image" class="biote-menu-logo" style="height: 24px !important; width: auto !important; max-height: 24px !important; vertical-align: middle; margin-right: 0px;">
+{%- elsif itemName == 'Biote Website' -%}
+  <img src="https://cdn.shopify.com/s/files/1/0522/8678/3654/files/biote.png?v=1771025489" alt="Biote logo image" class="biote-menu-logo" style="height: 24px !important; width: auto !important; max-height: 24px !important; vertical-align: middle; margin-right: 0px;"> Website
+{%- elsif itemName contains '[' and itemName contains ']' -%}
+  {{itemName | escape | split: '[' | first}}
+{%- else -%}
+  {{itemName | escape}}
+{%- endif -%}
