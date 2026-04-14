@@ -367,4 +367,34 @@ div.customstyle1626640638d820e935 h1.line-after:after,
   background-color: #111111 !important;
 }
 
+/* Lighthouse touch-target fix: newsletter input + submit button */
+.newsletterCustom .form-group .form-control,
+[id^="shopify-section-newsletter-page"] .form-group .form-control {
+  min-height: 48px;
+}
+
+.newsletterCustom .input-group-append .btn.btn-theme,
+[id^="shopify-section-newsletter-page"] .input-group-append .btn.btn-theme {
+  min-height: 48px;
+  min-width: 48px;
+  padding: 10px 18px;
+}
+
+@media (max-width: 767px) {
+  .newsletterCustom .input-group,
+  [id^="shopify-section-newsletter-page"] .input-group {
+    gap: 8px;
+  }
+
+  .newsletterCustom .input-group-append,
+  [id^="shopify-section-newsletter-page"] .input-group-append {
+    padding-left: 0 !important;
+  }
+
+  .newsletterCustom .input-group-append .btn.btn-theme,
+  [id^="shopify-section-newsletter-page"] .input-group-append .btn.btn-theme {
+    width: 100%;
+  }
+}
+
 
