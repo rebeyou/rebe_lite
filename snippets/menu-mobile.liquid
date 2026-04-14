@@ -31,9 +31,9 @@
           </button>
         </div>
         <div class="collapse meganav meganav--drawer" id="DrawerLinklist-{{ child_list_handle }}" aria-labelledby="DrawerLabel-{{ child_list_handle }}" role="navigation">
-          <ul class="meganav__nav">
+          <div class="meganav__nav" role="list">
             {%- include 'drawer-nav' -%}
-          </ul>
+          </div>
         </div>
       </li>
       {%- else -%}

@@ -1,6 +1,6 @@
 <!-- drawer-nav.liquid -->
 <div class="grid grid--no-gutters meganav__scroller meganav__scroller--has-list">
-  <div class="grid__item meganav__list">
+  <ul class="grid__item meganav__list list-unstyled mb-0">
     {%- for childlink in link.links -%}
     <li class="drawer__nav-item">
       {%- if childlink.links != blank -%}
@@ -47,5 +47,5 @@
       {%- endif -%}
     </li>
     {%- endfor -%}
-  </div>
+  </ul>
 </div>
