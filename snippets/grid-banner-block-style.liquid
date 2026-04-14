@@ -1,0 +1,69 @@
+<!-- snippets/grid-banner-block-style.liquid --><!-- snippets/grid-banner-block-style.liquid -->
+<style>
+  .banner-theme-{{ block.id }} {
+    position: relative;
+    {% if block.settings.image %}aspect-ratio: {{ block.settings.image.width }} / {{ block.settings.image.height }};{% endif %}
+    overflow: hidden;
+  }
+
+  .banner-theme-{{ block.id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .figcaption--{{ block.id }} {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px !important;
+    margin: 0 !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .figcaption--{{ block.id }} .bg-des:before {
+    background-color: {{ block.settings.bg_colorhover }};
+  }
+
+  .figcaption--{{ block.id }} h1,
+  .figcaption--{{ block.id }} h2,
+  .figcaption--{{ block.id }} h3,
+  .figcaption--{{ block.id }} h4 {
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    text-align: center !important;
+    font-size: clamp(0.75rem, 2.5vw, 1.4rem) !important;
+    margin: 0 !important;
+    padding: 0 8px !important;
+  }
+  
+  /* Headings — allow wrapping, fluid font size */
+  .figcaption--{{ block.id }} h3.mb-2 {
+  font-size: clamp(1.4rem, 3.5vw, 2.8rem) !important;
+  }
+  
+  @media only screen and (min-width: 992px) {
+    .figcaption--{{ block.id }} .bg-des {
+      background-color: {{ block.settings.bg_color | color_modify: 'alpha', block.settings.opacity_bg }};
+    }
+    .banner-theme-{{ block.id }} figcaption div > * {
+      color: {{ block.settings.colordef }};
+    }
+    .banner-theme-{{ block.id }}:hover figcaption div > * {
+      color: {{ block.settings.colorhover }} !important;
+    }
+  }
+  .figcaption--{{ block.id }} .btn {
+  display: none !important;
+  }
+</style>
+ 

@@ -1,0 +1,370 @@
+:root{
+  --main:#8a5e00;
+  --bg:#FAF9F5;
+  --blue:#92A1A6;
+  --light-main:#d7beb4;
+}
+/* Base */
+html,body{overflow-x:hidden;scroll-behavior:smooth;margin:0}
+
+.site-header__logo img{width:150px}
+
+.container{position:relative;z-index:1}
+
+/* Typography */
+h1{font-size:60px;margin:0 0 2.5rem;position:relative}
+p{font-size:13px}
+
+/* Buttons */
+.btn.btn-main{display:inline-block;padding:11px 30px;font-size:14px;font-weight:600;text-transform:uppercase;background:var(--main);color:#fff;border:none;border-radius:6px;position:relative;overflow:hidden;transition:transform .3s}
+.btn.btn-main:before{content:'';position:absolute;top:0;right:0;height:100%;width:0;background:#dbc8a7;transition:width .3s}
+.btn.btn-main:hover:before{left:0;right:auto;width:100%}
+
+/* Banner / captions */
+.banner-theme{position:relative;overflow:hidden}
+.banner-theme img{display:block;width:100%;height:auto;object-fit:cover}
+.banner-theme figcaption{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:90%;text-align:center;display:flex;flex-direction:column;align-items:center}
+.banner-theme figcaption h1{color:#000;font-size:28px;font-weight:700;white-space:nowrap}
+/* Make front-facing small banner headings black and bold site-wide */
+.banner-theme h3.mb-2,
+.banner h3.mb-2,
+[class*="banner"] h3.mb-2,
+.image-banner h3.mb-2,
+.slideshow h3.mb-2{
+  color:#000;
+  font-weight:700;
+}
+@media (max-width:767px){
+  .banner-theme figcaption h1{font-size:20px;white-space:normal}
+  h1{font-size:28px}
+}
+
+/* Banner caption helpers */
+.custom-banner-caption{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.custom-banner-caption h1{font-size:2.5rem;font-weight:700;line-height:1.2}
+@media (max-width:767px){.custom-banner-caption h1{font-size:1.75rem}}
+@media (min-width:992px){.custom-banner-caption h1{font-size:3rem}}
+
+/* Imagery blocks */
+.custom-imaging{position:relative;width:500px;height:550px;margin:0 auto}
+.custom-imaging::before{content:'';position:absolute;right:5%;bottom:-5%;width:500px;height:550px;background:var(--bg);z-index:-1}
+.custom-imaging img{display:block;object-fit:cover;width:100%;height:100%}
+
+/* Grids & banners */
+.grid-banner img,.grid-banner .banner-image img{width:100%;height:100%;object-fit:cover;object-position:center}
+
+/* Slick arrows */
+.slick-prev,.slick-next{width:55px;height:55px;border:2px solid #d7beb4;border-radius:50%;color:#d7beb4;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.slick-prev:hover,.slick-next:hover{border-color:var(--main)}
+.slick-prev:before,.slick-next:before{color:#d7beb4}
+
+/* Video banner */
+.video-banner{position:relative;overflow:hidden}
+.video-banner .video-btn{position:absolute;left:50%;transform:translateX(-50%);top:170px}
+.video-banner .video-title{position:absolute;bottom:60px;width:100%;text-align:center;font-size:45px;color:#fff;font-weight:800}
+@media (max-width:991px){.video-banner .video-title{font-size:30px;bottom:20px}}
+@media (max-width:575px){.video-banner .video-title{font-size:18px;bottom:10px}}
+
+/* Forms */
+.newsletterCustom{position:relative}
+.newsletterCustom .form-control{height:60px;padding:5px 29px;border-radius:30px;border:1px solid #e6ebfc;max-width:500px;margin:0 auto;display:block;background:#fff}
+.newsletterCustom .input-group>.input-group-append>.btn{position:absolute;right:10%;top:0;height:60px;border-radius:30px;padding:0 25px}
+
+/* Accessibility / touch targets */
+.drawer__nav-link,.footer-mid__linklist a{min-height:48px;display:flex;align-items:center;padding:12px 16px}
+.btn.btn-theme.mainlys,
+a.mainlys-inner{
+  min-height:48px;
+  min-width:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+}
+.btn.btn-theme.mainlys{
+  padding:0;
+  overflow:visible;
+  line-height:1.2;
+}
+.btn.btn-theme.mainlys:before{display:none}
+.btn.btn-theme.mainlys:hover:before{display:none;width:0}
+.btn.btn-theme.mainlys,.btn.btn-theme.mainlys:hover,.btn.btn-theme.mainlys:focus{background:#d9c19d;color:#111}
+.btn.btn-theme.mainlys .mainlys-inner,
+.btn.btn-theme.mainlys .mainlys-inner:hover,
+.btn.btn-theme.mainlys .mainlys-inner:focus,
+a.mainlys-inner{
+  width:100%;
+  min-height:48px;
+  padding:12px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  text-decoration:none;
+  color:#111;
+  line-height:1.2;
+  box-sizing:border-box;
+}
+.btn.btn-underline-white, .btn.btn-underline-white.gradient-theme{color:#1a1a1a;text-shadow:none}
+.btn.btn-underline-white:hover, .btn.btn-underline-white.gradient-theme:hover{background-color:#a07830;color:#1a1a1a}
+
+/* Breadcrumb / decorative layers */
+.g-breadcrumb{position:relative;overflow:hidden}
+.g-breadcrumb .layer{position:absolute;opacity:.05;border-radius:180px}
+.g-breadcrumb .container::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:300px;height:300px;background:#f7a582;opacity:.1;border-radius:50%;z-index:-1}
+
+/* Reusable utilities */
+.text-main{color:var(--main)}
+.text-light-main{color:#dbc8a7}
+.text-blue-main{color:var(--blue)}
+.text-black-main{color:#252425}
+.text-italic{font-style:italic}
+.center-flex{display:flex;justify-content:center}
+
+/* Small screens */
+@media (max-width:500px){
+  .image-content__image-wrapper img{width:100%;height:auto}
+  .imgblock .imgblock-bg{height:60%;top:-10%;width:115%}
+  h3.main-quote-title{font-size:38px}
+  .custom-block1{padding:0 2rem 0 1rem;margin-left:1rem}
+}
+
+/* CSS animations (shortened) */
+@keyframes movingleftright1{0%{transform:translate(0,0)}40%{transform:translate(50px,-200px)}75%{transform:translateX(800px)}100%{transform:translate(0,0)}}
+@keyframes movingleftright2{0%{transform:translate(0,0)}40%{transform:translate(-50px,200px)}75%{transform:translateX(-500px)}100%{transform:translate(0,0)}}
+@keyframes movingleftright3{0%{transform:translate(0,0)}40%{transform:translate(100px,-200px)}75%{transform:translateX(-500px)}100%{transform:translate(0,0)}}
+
+.shape-group-9 .shape.shape-2{animation:movingleftright1 20s infinite;top:180px;left:18%;opacity:.5}
+.shape-group-9 .shape.shape-3{animation:movingleftright2 25s infinite;top:31%;left:20%}
+.shape-group-9 .shape.shape-4{animation:movingleftright1 25s infinite;top:44%;left:28%}
+.shape-group-9 .shape.shape-5{animation:movingleftright2 30s infinite;top:50%;left:17%}
+.shape-group-9 .shape.shape-6{animation:movingleftright3 30s infinite;top:26%;right:21%}
+.shape-group-9 .shape{position:absolute;z-index:0}
+
+/* Keep banner headings visible on small viewports */
+@media screen and (max-width:749px){
+  .banner h1,[class*="banner"] h1,.image-banner h1,.slideshow h1{display:block;opacity:1;visibility:visible;font-size:28px;color:#000;font-weight:700;margin-bottom:1rem}
+}
+
+/* AOS fix (avoid hidden animations when JS disabled) */
+[data-aos]{visibility:visible!important;opacity:1!important;transform:none!important;transition:none!important}
+
+/* Section-specific helpers kept minimal to avoid specificity wars */
+.mainSection-box{padding:5rem 0;width:100%}
+.mainSection-box:nth-child(2n){background:var(--bg)}
+
+/* Equal-height banners / rows
+  - Make grid/banner rows use flex so columns match height
+  - Keep selector scope narrow to avoid breaking other rows
+*/
+.grid-banner, .grid-banner .row {display:flex;flex-wrap:wrap;align-items:stretch}
+.grid-banner [class*="col-"]{display:flex;flex-direction:column}
+.grid-banner .banner-image, figure.banner-theme, .video-banner .video-banner-image{display:flex;align-items:stretch;width:100%}
+.grid-banner .banner-image img, figure.banner-theme img, .video-banner .video-banner-image img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* Restore light-blue 2px border on banners and force wrappers to stretch
+   Targets common banner structures used by theme: .banner-image, figure.banner-theme, .video-banner-image
+*/
+figure.banner-theme, .grid-banner .banner-image, .video-banner .video-banner-image{
+  box-sizing:border-box; /* keep border inside size */
+  border:2px solid #7fbfff; /* slightly darker light-blue 2px */
+  height:100%;
+  display:flex;
+  align-items:stretch;
+}
+
+/* Ensure direct children (links / image wrappers) fill the column height */
+.grid-banner [class*="col-"] > a, .grid-banner [class*="col-"] > .banner-image, .grid-banner [class*="col-"] > figure.banner-theme {
+  display:flex;flex-direction:column;flex:1 1 auto;align-items:stretch;justify-content:stretch;height:100%;
+}
+
+/* Apply same equal-height behaviour site-wide for section rows so every page's rows match height
+   Keep scope to rows inside main sections to avoid globally changing Bootstrap rows
+*/
+.mainSection-box .row,
+.section-row,
+.page-section .row {display:flex;flex-wrap:wrap;align-items:stretch}
+.mainSection-box [class*="col-"], .section-row [class*="col-"], .page-section [class*="col-"]{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+.mainSection-box [class*="col-"] > *{flex:1 1 auto;min-height:0}
+/* Ensure flex children can shrink and fill so heights match across columns */
+.mainSection-box .row > [class*="col-"] > *,
+.section-row > [class*="col-"] > *,
+.page-section .row > [class*="col-"] > *{
+  display:flex;
+  flex-direction:column;
+  flex:1 1 auto;
+  min-height:0;
+}
+
+/* Make images fully fill their wrapper while preserving cover behaviour */
+.grid-banner .banner-image img, .grid-banner figure.banner-theme img, .video-banner .video-banner-image img{
+  width:100%;height:100%;object-fit:cover;flex:1 1 auto;display:block
+}
+
+/* Ensure figure wrappers include padding in their height calculations and images fill the inner box */
+.grid-banner [class*="col-"] figure.banner-theme,
+.mainSection-box [class*="col-"] figure.banner-theme,
+.section-row [class*="col-"] figure.banner-theme {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+}
+.grid-banner [class*="col-"] figure.banner-theme img,
+.mainSection-box [class*="col-"] figure.banner-theme img,
+.section-row [class*="col-"] figure.banner-theme img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  box-sizing:border-box;
+}
+
+/* If an inner wrapper adds padding (e.g. 12px), the box-sizing above ensures the image fits inside the specified height instead of overflowing. */
+
+/* Make all images inside columns fill the column height so sibling images match
+   - targets common column structures and nested wrappers used across sections
+   - ensures inner padding does not cause visual overflow
+*/
+.mainSection-box .row > [class*="col-"]{min-height:0}
+
+/* Remove injected background bubble decorations */
+.shape-group-9{display:none !important}
+.mainSection-box .row > [class*="col-"] > a,
+.mainSection-box .row > [class*="col-"] > figure,
+.section-row > [class*="col-"] > a,
+.section-row > [class*="col-"] > figure,
+.page-section .row > [class*="col-"] > a,
+.page-section .row > [class*="col-"] > figure{
+  display:flex;
+  flex-direction:column;
+  flex:1 1 auto;
+  min-height:0;
+}
+
+.mainSection-box .row > [class*="col-"] img,
+.section-row > [class*="col-"] img,
+.page-section .row > [class*="col-"] img,
+.mainSection-box .row > [class*="col-"] a img,
+.section-row > [class*="col-"] a img,
+.page-section .row > [class*="col-"] a img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  box-sizing:border-box;
+  flex:1 1 auto;
+}
+
+/* For columns that contain multiple stacked images, ensure each image wrapper is stretched equally */
+.mainSection-box .row > [class*="col-"] .banner-image,
+.section-row > [class*="col-"] .banner-image,
+.page-section .row > [class*="col-"] .banner-image{
+  display:flex;flex-direction:column;flex:1 1 auto;min-height:0
+}
+
+/* Scoped rule for homepage grid wrapper .customstyle1626636605d148e855.gr-banner-bg */
+.customstyle1626636605d148e855.gr-banner-bg .row > [class*="col-"] figure.banner-theme,
+.customstyle1626636605d148e855.gr-banner-bg [class*="col-"] figure.banner-theme {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.customstyle1626636605d148e855.gr-banner-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width:767px){
+  /* small screens: remove fixed full-height forcing so rows stack naturally */
+  .grid-banner, .grid-banner .row {display:block}
+  figure.banner-theme, .grid-banner .banner-image, .video-banner .video-banner-image{border-width:2px}
+}
+
+/* End cleaned stylesheet */
+
+nav a img, .nav img, .site-nav__title img {
+  vertical-align: middle;
+  position: relative;
+  top: -7px; /* adjust this value up/down to fine-tune */
+}
+.main-content {
+  padding: 0px;
+}
+.breadcrumbs-style_2 {
+  display: none;
+}
+.grid__item-inner--html {
+  pointer-events: none;
+}
+.grid__item-inner--html a,
+.grid__item-inner--html button {
+  pointer-events: auto;
+}
+/* Topbar */
+.home-topbar-class {
+  background-color: #000;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ← centers items horizontally */
+  width: 100%;
+}
+.phone_topbar,
+.address_topbar {
+  color: #fff;
+  font-size: 14px;
+}
+.phone_topbar a.white_highlight {
+  color: #fff;
+  text-decoration: none;
+}
+
+.phone_topbar a.white_highlight:hover {
+  text-decoration: underline;
+}
+/* Icons inside topbar */
+.phone_topbar i,
+.address_topbar i {
+  color: #fff;
+}
+/* Responsive — hide address on mobile, keep phone */
+@media (max-width: 768px) {
+  .address_topbar {
+    display: none;
+  }
+}
+h2.bottom-title,
+h3.bottom-title {
+  color: #1a1a1a; /* adjust to pass 4.5:1 against your background */
+}
+/* Accessibility: targeted contrast fix for the "Meet Us" HTML builder block */
+div.customstyle1626640638d820e935 {
+  background-color: rgba(255, 255, 255, 0.94) !important;
+  color: #111111 !important;
+}
+
+div.customstyle1626640638d820e935 h1.text-white.line-after,
+div.customstyle1626640638d820e935 p.text-white,
+div.customstyle1626640638d820e935 span.small-text,
+.after-bg h1.text-white.line-after,
+.after-bg p.text-white,
+.after-bg span.small-text {
+  color: #111111 !important;
+  text-shadow: none !important;
+}
+
+div.customstyle1626640638d820e935 h1.line-after::after,
+div.customstyle1626640638d820e935 h1.line-after:after,
+.after-bg h1.line-after::after,
+.after-bg h1.line-after:after {
+  background-color: #111111 !important;
+}
+
+

@@ -1,0 +1,98 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page-styles": {
+      "type": "html-v3",
+      "settings": {
+        "enablesection": true,
+        "animation": "",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "setwidth": "container",
+        "code": "<style>.main-content{padding-bottom:0;}</style>"
+      }
+    },
+    "grid-banner": {
+      "type": "grid-banner",
+      "blocks": {
+        "1626636605d148e855-0": {
+          "type": "banner",
+          "settings": {
+            "aria_label": "billboard of teddy bear smiling leaning on a breast implant",
+            "image": "shopify://shop_images/goodBearAd.webp",
+            "width": "4",
+            "description": "<h3 class=\"mb-2\">Breast Implants</h3>",
+            "bg_color": "#fefefe",
+            "colordef": "#ffffff",
+            "bg_colorhover": "#c99a5c",
+            "colorhover": "#ffffff",
+            "opacity_bg": 0,
+            "max-width": 290,
+            "button_text": "",
+            "button_icon": "",
+            "button_link": "shopify://pages/breast-augmentation",
+            "vertical": "mid",
+            "horizontal": "center",
+            "text_align": "center"
+          }
+        },
+        "banner_XWayap": {
+          "type": "banner",
+          "settings": {
+            "aria_label": "young woman with breast dressings in place after surgery",
+            "image": "shopify://shop_images/Surgical_Procedures_Lady.webp",
+            "width": "4",
+            "description": "<h3 class=\"mb-2\">Breast Lifts</h3><p></p>",
+            "bg_color": "#fefefe",
+            "colordef": "#ffffff",
+            "bg_colorhover": "#c99a5c",
+            "colorhover": "#ffffff",
+            "opacity_bg": 0,
+            "max-width": 290,
+            "button_text": "View more",
+            "button_icon": "",
+            "button_link": "",
+            "vertical": "bottom",
+            "horizontal": "center",
+            "text_align": "center"
+          }
+        }
+      },
+      "block_order": [
+        "1626636605d148e855-0",
+        "banner_XWayap"
+      ],
+      "settings": {}
+    },
+    "advanced-content-breast": {
+      "type": "advanced-content-breast",
+      "settings": {
+        "enablesection": true,
+        "animation": "",
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "60px 0px 60px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px",
+        "bgsection": "#fefefe",
+        "title_top": "Sub Title Top",
+        "title": "Custom content",
+        "des": "",
+        "setwidth": "container",
+        "padding": true
+      }
+    }
+  },
+  "order": [
+    "page-styles",
+    "grid-banner",
+    "advanced-content-breast"
+  ]
+}

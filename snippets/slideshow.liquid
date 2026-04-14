@@ -1,0 +1,7 @@
+{%- if template == 'index' -%}
+  {%- case settings.slideshow -%}
+    {%- when 'slideshow-1' -%} {%- section 'slideshow-1' -%}
+  {%- else -%}
+    Missing liquid
+  {%- endcase -%}
+{%- endif -%}

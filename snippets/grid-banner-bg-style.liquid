@@ -1,0 +1,121 @@
+<!-- grid-banner-block-style.liquid -->
+<style>
+  /* Anchor figcaption over the full visible image area */
+  .banner-theme-{{block.id}} {
+    position: relative;
+    aspect-ratio: {{block.settings.image.width}} / {{block.settings.image.height}};
+    overflow: hidden;
+  }
+  .banner-theme-{{block.id}} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .figcaption--{{block.id}} {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px !important;
+    margin: 0 !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .figcaption--{{block.id}} .bg-des:before {
+    background-color: {{block.settings.bg_colorhover}};
+  }
+  /* H2 — allow wrapping, fluid font size */
+  .figcaption--{{block.id}} h1,
+  .figcaption--{{block.id}} h2,
+  .figcaption--{{block.id}} h3,
+  .figcaption--{{block.id}} h4 {
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    text-align: center !important;
+    font-size: clamp(0.75rem, 2.5vw, 1.4rem) !important;
+    margin: 0 !important;
+    padding: 0 8px !important;
+  }
+  @media only screen and (min-width: 992px) {
+    .figcaption--{{block.id}} .bg-des {
+      background-color: {{block.settings.bg_color}};
+      opacity: {{block.settings.opacity_bg}};
+    }
+    .banner-theme-{{block.id}} figcaption div > * {
+      color: {{block.settings.colordef}};
+    }
+    .banner-theme-{{block.id}}:hover figcaption div > * {
+      color: {{block.settings.colorhover}} !important;
+    }
+  }
+</style>
+
+<!-- grid-banner-bg-style.liquid -->
+{%- if section.settings.bgstyle -%}
+  <style>
+    .gr-banner-bg{
+      position: relative;
+    }
+    .gr-banner-bg .bg-before{
+      background-color: {{section.settings.bgbefore}};
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      content: "";
+      height: 350px;
+    }
+  </style>
+  <style>
+    figure.banner-theme {
+      position: relative;
+      overflow: hidden !important;
+    }
+    .custom-banner-caption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 30px;
+    }
+    .custom-banner-caption .position-relative {
+      width: 100%;
+      text-align: center;
+    }
+    .custom-banner-caption h2 {
+      width: 100%;
+      text-align: center;
+      margin: 0 0 10px 0;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+    }
+    @media (max-width: 768px) {
+      .custom-banner-caption h2 {
+        font-size: clamp(1.25rem, 5vw, 2.5rem);
+        line-height: 1.2;
+      }
+    }
+    .custom-banner-caption h3 {
+      width: 100%;
+      text-align: center;
+      margin: 0 0 10px 0;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+    }
+  </style>
+{%- endif -%}
