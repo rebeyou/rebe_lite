@@ -15,7 +15,7 @@ theme.Sections = function Sections() {
     .on('shopify:block:deselect', this._onBlockDeselect.bind(this));
 };
 
-theme.Sections.prototype = _.assignIn({}, theme.Sections.prototype, {
+theme.Sections.prototype = Object.assign({}, theme.Sections.prototype, {
   _createInstance: function(container, constructor) {
     var $container = $(container);
     var id = $container.attr('data-section-id');
@@ -23,11 +23,11 @@ theme.Sections.prototype = _.assignIn({}, theme.Sections.prototype, {
 
     constructor = constructor || this.constructors[type];
 
-    if (_.isUndefined(constructor)) {
+    if (constructor === undefined) {
       return;
     }
 
-    var instance = _.assignIn(new constructor(container), {
+    var instance = Object.assign(new constructor(container), {
       id: id,
       type: type,
       container: container
@@ -51,11 +51,11 @@ theme.Sections.prototype = _.assignIn({}, theme.Sections.prototype, {
     }
   },
   _onSectionUnload: function(evt) {
-    this.instances = _.filter(this.instances, function(instance) {
+    this.instances = this.instances.filter(function(instance) {
       var isEventInstance = instance.id === evt.detail.sectionId;
 
       if (isEventInstance) {
-        if (_.isFunction(instance.onUnload)) {
+        if (typeof instance.onUnload === 'function') {
           instance.onUnload(evt);
         }
       }
@@ -66,44 +66,44 @@ theme.Sections.prototype = _.assignIn({}, theme.Sections.prototype, {
 
   _onSelect: function(evt) {
     // eslint-disable-next-line no-shadow
-    var instance = _.find(this.instances, function(instance) {
+    var instance = this.instances.find(function(instance) {
       return instance.id === evt.detail.sectionId;
     });
 
-    if (!_.isUndefined(instance) && _.isFunction(instance.onSelect)) {
+    if ( instance !== undefined && typeof instance.onSelect === 'function') {
       instance.onSelect(evt);
     }
   },
 
   _onDeselect: function(evt) {
     // eslint-disable-next-line no-shadow
-    var instance = _.find(this.instances, function(instance) {
+    var instance = this.instances.find(function(instance) {
       return instance.id === evt.detail.sectionId;
     });
 
-    if (!_.isUndefined(instance) && _.isFunction(instance.onDeselect)) {
+    if ( instance !== undefined &&typeof instance.onDeselect === 'function') {
       instance.onDeselect(evt);
     }
   },
 
   _onBlockSelect: function(evt) {
     // eslint-disable-next-line no-shadow
-    var instance = _.find(this.instances, function(instance) {
+    var instance = this.instances.find(function(instance) {
       return instance.id === evt.detail.sectionId;
     });
 
-    if (!_.isUndefined(instance) && _.isFunction(instance.onBlockSelect)) {
+    if ( instance !== undefined && typeof instance.onBlockSelect === 'function') {
       instance.onBlockSelect(evt);
     }
   },
 
   _onBlockDeselect: function(evt) {
     // eslint-disable-next-line no-shadow
-    var instance = _.find(this.instances, function(instance) {
+    var instance = this.instances.find(function(instance) {
       return instance.id === evt.detail.sectionId;
     });
 
-    if (!_.isUndefined(instance) && _.isFunction(instance.onBlockDeselect)) {
+    if ( instance !== undefined && typeof instance.onBlockDeselect === 'function') {
       instance.onBlockDeselect(evt);
     }
   },
@@ -561,7 +561,7 @@ slate.Variants = (function() {
     );
   }
 
-  Variants.prototype = _.assignIn({}, Variants.prototype, {
+  Variants.prototype = Object.assign({}, Variants.prototype, {
     /**
      * Get the currently selected options from add-to-cart form. Works with all
      * form input elements.
@@ -569,7 +569,7 @@ slate.Variants = (function() {
      * @return {array} options - Values of currently selected variants
      */
     _getCurrentOptions: function() {
-      var currentOptions = _.map(
+      var currentOptions = $.map(
         $(this.singleOptionSelector, this.$container),
         function(element) {
           var $element = $(element);
@@ -595,7 +595,7 @@ slate.Variants = (function() {
       );
 
       // remove any unchecked input values if using radio buttons or checkboxes
-      currentOptions = _.compact(currentOptions);
+      currentOptions = currentOptions.filter(Boolean);
 
       return currentOptions;
     },
@@ -610,9 +610,9 @@ slate.Variants = (function() {
       var selectedValues = this._getCurrentOptions();
       var variants = this.product.variants;
 
-      var found = _.find(variants, function(variant) {
+      var found = variants.find(function(variant) {
         return selectedValues.every(function(values) {
-          return _.isEqual(variant[values.index], values.value);
+          return variant[values.index] === values.value;
         });
       });
 
@@ -1593,7 +1593,7 @@ theme.Product = (function() {
     this.init();
   }
 
-  Product.prototype = _.assignIn({}, Product.prototype, {
+  Product.prototype = Object.assign({}, Product.prototype, {
     init: function() {
       this._stringOverrides();
       this._initVariants();
@@ -2275,10 +2275,11 @@ theme.Slideshow = (function() {
       accessibility: true,
       arrows: true,
       dots: true,
-      fade: (theme.rtl ? false : true),
+      fade: false,
       draggable: true,
       touchThreshold: 20,
-      autoplay: this.autorotate,
+      infinite: false,
+      initialSlide: 0,
       autoplaySpeed: autoplaySpeed,
       customPaging: function(slider, i) {
         return $('<button>', {
@@ -2292,13 +2293,14 @@ theme.Slideshow = (function() {
         );
       },
       init: function() {
+        $(this).find('.slick-track').removeAttr('role');
+        $(this).find('.slick-slide').removeAttr('role');
         $(this).find('.slick-slide[aria-hidden="true"]')
           .find('a, button, input, select, textarea, [tabindex]')
           .not('.slick-dots button')
           .attr('tabindex', '-1');
       }
     };
-
 
     this.$slideshow.on('beforeChange', beforeChange.bind(this));
     this.$slideshow.on('init', slideshowA11ySetup.bind(this));
@@ -2316,18 +2318,16 @@ theme.Slideshow = (function() {
     );
 
     this.$slideshow.on('afterChange', function(event, slick, currentSlide) {
-      // Update dot aria-selected and tabindex
       var $dots = this.$slideshow.find('.slick-dots button');
-      $dots
-        .attr('aria-selected', 'false')
-        .attr('tabindex', '-1');
-      $dots.eq(currentSlide)
-        .attr('aria-selected', 'true')
-        .attr('tabindex', '0');
+      $dots.attr('aria-selected', 'false').attr('tabindex', '-1');
+      $dots.eq(currentSlide).attr('aria-selected', 'true').attr('tabindex', '0');
 
-      // inert on hidden slides
       this.$slideshow.find('.slick-slide').prop('inert', false);
       this.$slideshow.find('.slick-slide[aria-hidden="true"]').prop('inert', true);
+
+      // Keep ARIA roles clean after slide change
+      this.$slideshow.find('.slick-track').removeAttr('role');
+      this.$slideshow.find('.slick-slide').removeAttr('role');
     }.bind(this));
 
     if (this.adaptHeight) {
@@ -2335,17 +2335,17 @@ theme.Slideshow = (function() {
       $(window).resize($.debounce(50, this.setSlideshowHeight.bind(this)));
     }
 
-    this.$slideshow.slick(this.settings);
-
-     
-  // This can't be called when the slick 'init' event fires due to how slick
-      // adds a11y features.
+    this.$slideshow.slick(this.settings);     
+       // This can't be called when the slick 'init' event fires due to how slick adds a11y features.
       slideshowPostInitA11ySetup.bind(this)();
     }
 
   function slideshowA11ySetup(event, obj) {
     var $slider = obj.$slider;
-    var $list = obj.$list;
+ var $list = obj && obj.$list;
+ if (!$list || typeof $list.removeAttr !== 'function') {
+      $list = obj && obj.$slider && obj.$slider.find ? obj.$slider.find('.slick-list') : this.$container && this.$container.find ? this.$container.find('.slick-list') : $();
+    }
     this.$dots = this.$section.find(selectors.dots);
     this.$mobileDots = this.$dots.eq(1);
 
@@ -2414,10 +2414,8 @@ theme.Slideshow = (function() {
     this.$controls
       .on('focusin', highlightControls.bind(this))
       .on('focusout', unhighlightControls.bind(this));
-  }
-  
-  
-
+  }  
+ 
   function slideshowPostInitA11ySetup() {
     var $slides = this.$slideshow.find(selectors.slides);
 
@@ -2426,8 +2424,7 @@ theme.Slideshow = (function() {
     // ADD THESE TWO LINES:
     $slides.filter(':not(.slick-cloned)').each(function(i, slide) {
       $(slide).attr('role', 'group').attr('aria-label', 'Slide ' + (i + 1) + ' of ' + $slides.filter(':not(.slick-cloned)').length);
-    });
-    
+    });    
     
     this.$dots
       .removeAttr('role')
@@ -2446,35 +2443,32 @@ theme.Slideshow = (function() {
           .attr('tabindex', i === 0 ? '0' : '-1');
       });
 
-    // MutationObserver to override Slick re-setting tabindex on hidden slides
-    var $slideshow = this.$slideshow;    
-    var observer = new MutationObserver(function() {
-      observer.disconnect();
-      $slideshow.find('.slick-dots li')
-        .removeAttr('aria-hidden')
-        .removeAttr('aria-selected')
-        .removeAttr('aria-controls')
-        .removeAttr('role')
-        .removeAttr('id');
-      $slideshow.find('.slick-dots button')
-        .removeAttr('role')
-        .removeAttr('aria-controls');
-      $slideshow.find('.slick-slide[aria-hidden="true"]')
-        .find('a, button, input, [tabindex="0"]')
-        .not('.slick-dots button')
-        .attr('tabindex', '-1');
+  // MutationObserver to override Slick re-setting tabindex on hidden slides
+  var $slideshow = this.$slideshow;     
+  var observer = new MutationObserver(function() {
+    observer.disconnect();
 
-      // Re-query fresh to avoid stale references
-      var $realSlides = $slideshow.find('.slideshow__slide:not(.slick-cloned)');
-      $realSlides.each(function(i, slide) {
-        $(slide).attr('role', 'group').attr('aria-label', 'Slide ' + (i + 1) + ' of ' + $realSlides.length);
-      });
+    // Remove invalid roles from slick-track and slick-list
+    $slideshow.find('.slick-track').removeAttr('role');
+    $slideshow.find('.slick-list').removeAttr('role');
 
-      observer.observe($slideshow[0], {
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['tabindex', 'aria-hidden', 'aria-selected', 'aria-controls', 'role']
-      });
+    $slideshow.find('.slick-dots li')
+      .removeAttr('aria-hidden')
+      .removeAttr('aria-selected')
+      .removeAttr('aria-controls')
+      .removeAttr('role')
+      .removeAttr('id');
+    $slideshow.find('.slick-dots button')
+      .removeAttr('role')
+      .removeAttr('aria-controls');
+    $slideshow.find('.slick-slide[aria-hidden="true"]')
+      .find('a, button, input, [tabindex="0"]')
+      .not('.slick-dots button')
+      .attr('tabindex', '-1');
+
+    var $realSlides = $slideshow.find('.slideshow__slide:not(.slick-cloned)');
+    $realSlides.each(function(i, slide) {
+      $(slide).attr('role', 'group').attr('aria-label', 'Slide ' + (i + 1) + ' of ' + $realSlides.length);
     });
 
     observer.observe($slideshow[0], {
@@ -2482,8 +2476,25 @@ theme.Slideshow = (function() {
       attributes: true,
       attributeFilter: ['tabindex', 'aria-hidden', 'aria-selected', 'aria-controls', 'role']
     });
-  }  
-  
+  });
+
+  // Remove roles before starting observation
+  $slideshow.find('.slick-track').removeAttr('role');
+  $slideshow.find('.slick-list').removeAttr('role');
+
+   observer.observe($slideshow[0], {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['tabindex', 'aria-hidden', 'aria-selected', 'aria-controls', 'role']
+  });
+
+  // Ensure first slide is visible to browser for LCP
+  this.$slideshow.find('.slick-slide[data-slick-index="0"]')
+    .removeAttr('inert')
+    .removeAttr('aria-hidden');
+  }
+
+     
   function beforeChange(event, slick, currentSlide, nextSlide) {
     var $dotLinks = this.$dots.find('button');
     var $mobileDotLinks = this.$mobileDots.find('li');
@@ -2564,7 +2575,7 @@ theme.SlideshowSection = (function() {
   return SlideshowSection;
 })();
 
-theme.SlideshowSection.prototype = _.assignIn(
+theme.SlideshowSection.prototype = Object.assign(
   {},
   theme.SlideshowSection.prototype,
   {
@@ -2615,7 +2626,7 @@ theme.Cart = (function() {
     this.init($container);
   }
 
-  Cart.prototype = _.assignIn({}, Cart.prototype, {
+  Cart.prototype = Object.assign({}, Cart.prototype, {
     init: function($container) {
       this._initQtySelector();
       this._initCartNote();
@@ -2777,9 +2788,12 @@ theme.Instagrams = (function() {
     feed.run();
   }
 
-  Instagrams.prototype = _.assignIn({}, Instagrams.prototype, {
+  Instagrams.prototype = Object.assign({}, Instagrams.prototype, {
     _a11y: function(event, obj) {
-      var $list = obj.$list;
+ var $list = obj && obj.$list;
+ if (!$list || typeof $list.removeAttr !== 'function') {
+        $list = obj && obj.$slider && obj.$slider.find ? obj.$slider.find('.slick-list') : this.$container && this.$container.find ? this.$container.find('.slick-list') : $();
+      }
       var $wrapper = this.$container.parent();
 
       // Remove default Slick aria-live attr until slider is focused
@@ -2872,9 +2886,12 @@ theme.slickCarousel = (function (){
     })
   }
 
-  Carousels.prototype = _.assignIn({}, Carousels.prototype, {
+  Carousels.prototype = Object.assign({}, Carousels.prototype, {
     _a11y: function(event, obj) {
-      var $list = obj.$list;
+ var $list = obj && obj.$list;
+ if (!$list || typeof $list.removeAttr !== 'function') {
+        $list = obj && obj.$slider && obj.$slider.find ? obj.$slider.find('.slick-list') : this.$container && this.$container.find ? this.$container.find('.slick-list') : $();
+      }
       var $wrapper = this.$container.parent();
 
       // Remove default Slick aria-live attr until slider is focused
@@ -2989,9 +3006,12 @@ theme.Productlists = (function() {
     }).css('opacity','1');
   }
 
-  Productlists.prototype = _.assignIn({}, Productlists.prototype, {
+  Productlists.prototype = Object.assign({}, Productlists.prototype, {
     _a11y: function(event, obj) {
-      var $list = obj.$list;
+ var $list = obj && obj.$list;
+ if (!$list || typeof $list.removeAttr !== 'function') {
+        $list = obj && obj.$slider && obj.$slider.find ? obj.$slider.find('.slick-list') : this.$container && this.$container.find ? this.$container.find('.slick-list') : $();
+      }
       var $wrapper = this.$container.parent();
 
       // Remove default Slick aria-live attr until slider is focused
@@ -3051,9 +3071,12 @@ theme.Producttabs = (function() {
     })
   }
 
-  Producttabs.prototype = _.assignIn({}, Producttabs.prototype, {
+  Producttabs.prototype = Object.assign({}, Producttabs.prototype, {
     _a11y: function(event, obj) {
-      var $list = obj.$list;
+ var $list = obj && obj.$list;
+ if (!$list || typeof $list.removeAttr !== 'function') {
+        $list = obj && obj.$slider && obj.$slider.find ? obj.$slider.find('.slick-list') : this.$container && this.$container.find ? this.$container.find('.slick-list') : $();
+      }
       var $wrapper = this.$container.parent();
 
       // Remove default Slick aria-live attr until slider is focused
@@ -3268,7 +3291,7 @@ theme.Video = (function() {
     this.onLoad();
   }
 
-  Video.prototype = _.assignIn({}, Video.prototype, {
+  Video.prototype = Object.assign({}, Video.prototype, {
     onLoad: function() {
       this.$container
         .on('click', selectors.loadPlayerButton, this._loadPlayer.bind(this))
@@ -3427,7 +3450,7 @@ theme.CollectionsList = (function() {
     );
   }
 
-  CollectionsList.prototype = _.assignIn({}, CollectionsList.prototype, {
+  CollectionsList.prototype = Object.assign({}, CollectionsList.prototype, {
     onUnload: function() {
       $(window).off(this.namespace);
     },
@@ -4708,9 +4731,12 @@ theme.Masonry = (function(){
     });
   }
 
-  Masonry.prototype = _.assignIn({}, Masonry.prototype, {
+  Masonry.prototype = Object.assign({}, Masonry.prototype, {
     _a11y: function(event, obj) {
-      var $list = obj.$list;
+ var $list = obj && obj.$list;
+ if (!$list || typeof $list.removeAttr !== 'function') {
+        $list = obj && obj.$slider && obj.$slider.find ? obj.$slider.find('.slick-list') : this.$container && this.$container.find ? this.$container.find('.slick-list') : $();
+      }
       var $wrapper = this.$container.parent();
 
       // Remove default Slick aria-live attr until slider is focused
@@ -5666,4 +5692,6 @@ $(theme.init);
 
   observer.observe(document.body, { childList: true, subtree: true });
 })();
+
+
 

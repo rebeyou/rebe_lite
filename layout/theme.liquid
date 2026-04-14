@@ -30,6 +30,7 @@
         fetchpriority="high"
       >
     {%- endif -%}
+    <!-- template-debug: "{{ template }}" "{{ request.page_type }}" "{{ template.name }}" -->
     {% if template == 'index' %}
       {%- assign _lcp_section = sections['slideshow-1'] -%}
       {%- assign _lcp_block = _lcp_section.blocks | first -%}
@@ -42,7 +43,7 @@
           type="image/webp">
       {%- else -%}
         <link rel="preload" as="image"
-          href="//www.rebeyou.com/cdn/shop/files/slideShow1.webp?v=1772287263&width=1200"
+          href="//www.rebeyou.com/cdn/shop/files/slideShow1.webp?v=1772287263&width=1500"
           imagesrcset="//www.rebeyou.com/cdn/shop/files/slideShow1.webp?v=1772287263&width=750 750w,
                       //www.rebeyou.com/cdn/shop/files/slideShow1.webp?v=1772287263&width=1200 1200w,
                       //www.rebeyou.com/cdn/shop/files/slideShow1.webp?v=1772287263&width=1500 1500w,
@@ -51,6 +52,7 @@
           fetchpriority="high"
           type="image/webp">
       {%- endif -%}
+      <!-- lcp-debug: "{{ _lcp_block.settings.image | image_url: width: 1500 }}" -->
     {% endif %}
     {%- include 'social-meta-tags' -%}      
     {%- include 'header-css' -%}

@@ -1,5 +1,19 @@
 <style>
 
+.slideshow__slide:not(:first-child) {
+  display: none;
+}
+.slick-initialized .slideshow__slide {
+  display: block;
+}
+.slideshow--display-controls-false {
+  transition: none !important;
+}
+
+.slideshow__slide:first-child .slideshow__image img {
+  transition: none !important;
+}   
+
 .slideshow-wrapper {
   position: relative;
 }
@@ -487,7 +501,7 @@
                   {%- endif -%}
                 </div>
               {%- else -%}
-                <div class="slideshow__image box ratio-container lazyload js lazypreload"           
+                <div class="slideshow__image box ratio-container lazyload js"           
                   data-bgset="{%- render 'bgset', image: block.settings.image -%}"
                   data-sizes="auto"
                   data-parent-fit="contain"

@@ -2628,3 +2628,6 @@ html body .banner-theme figcaption button.btn.btn-underline.btn-underline-white.
   background-repeat: no-repeat !important;
   background-position: center !important;
 }
+.page-container {
+  transition: none !important;
+}
