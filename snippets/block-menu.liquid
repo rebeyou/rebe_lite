@@ -23,7 +23,7 @@
       <a href="{{ link.url }}" class="site-nav__link dropdown-toggle" {% if link.active %} aria-current="page"{% endif %}>
         {% if link.title == 'Biote Hormones' %}
            <span class="site-nav__title">
-             <img src="https://cdn.shopify.com/s/files/1/0522/8678/3654/files/biote.png?v=1771025489" alt="Biote logo image" class="biote-menu-logo" style="height: 24px !important; width: auto !important; max-height: 24px !important; vertical-align: middle; margin-right: 0px;"> Hormones
+             {%- render 'biote-menu-logo' -%} Hormones
            </span>
         {% else %}
           <span class="site-nav__title">{%- include 'processMenuTitle' with itemName:link.title -%}</span>
@@ -39,7 +39,7 @@
       <a href="{{ link.url }}" class="site-nav__link dropdown-toggle" {% if link.active %} aria-current="page"{% endif %}>
         {% if link.title == 'Biote Hormones' %}
            <span class="site-nav__title">
-              <img src="https://cdn.shopify.com/s/files/1/0522/8678/3654/files/biote.png?v=1771025489" alt="Biote logo image" class="biote-menu-logo" style="height: 24px !important; width: auto !important; max-height: 24px !important; vertical-align: middle; margin-right: 0px;"> Hormones
+              {%- render 'biote-menu-logo' -%} Hormones
            </span>
         {% else %}
            <span class="site-nav__title">{%- include 'processMenuTitle' with itemName:link.title -%}</span>
